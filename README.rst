@@ -8,9 +8,10 @@ Collection
 Collection is a class that provides a unified interface to various types of 
 collections of data. Specifically, you can provide a list, a dictionary, a set, 
 or a generator, and you can access the members of the collection as if they they 
-were a in a list or a dictionary.
+were a in a list or a dictionary. For collections like lists where there is no 
+key, the index is used instead.
 
-Consider the following collections:
+Consider the following collections::
 
     >>> l = ['alpha', 'beta', 'gamma', 'delta', 'epsilon']
     >>> d = dict(
@@ -25,7 +26,12 @@ dictionaries::
 
     >>> from collection import Collection
 
-List::
+
+Lists
+-----
+
+You can build a collection from a list. In this case the index is used as the 
+key::
 
     >>> L = Collection(l)
     >>> for each in L:
@@ -60,7 +66,11 @@ List::
     3 delta
     4 epsilon
 
-Dictionary::
+
+Dictionaries
+------------
+
+You can build a collection from a dictionary::
 
     >>> D = Collection(d)
     >>> for each in D:
@@ -91,7 +101,12 @@ Dictionary::
     carol 891-5810
     alice 552-2219
 
-Set::
+
+Sets
+----
+
+You can build a collection from a set. In this case the index is used as the 
+key::
 
     >>> S = Collection(s)
     >>> for each in S:
@@ -122,7 +137,14 @@ Set::
     2 45
     3 22
 
-Text::
+
+Text
+----
+
+If you provide a string it will be split for form a list. You can specify the 
+*splitter* string, but if you don't the string is split on white space. You can 
+also specify *splitter=False*, in which case the string is not split (it is 
+taken as a scalar::
 
     >>> T = Collection(t)
     >>> for each in T:
@@ -149,7 +171,11 @@ Text::
     1 orange
     2 mango
 
-Scalar::
+
+Scalar
+------
+
+You can build a collection from a single member. In this case the key is None::
 
     >>> O = Collection(o, splitter=False)
     >>> for each in O:
@@ -168,7 +194,12 @@ Scalar::
     ...     print(k, v)
     None tooth
 
-Generator::
+
+Generators
+----------
+
+You can build a collection from a generator. In this case the index is used as 
+the key::
 
     >>> G = Collection(range(4))
     >>> for each in G:
@@ -199,7 +230,11 @@ Generator::
     2 2
     3 3
 
-Indexing::
+
+Indexing
+--------
+
+You can access the individual members of you collection using an index/key::
 
     >>> L[0]
     'alpha'
@@ -210,10 +245,23 @@ Indexing::
     >>> T[2]
     'mango'
 
-    >>> G[1]
-    1
+    >>> G[-1]
+    3
 
-Formatting::
+
+Formatting
+----------
+
+When formatting a collection you can specify a member format and a separator.  
+These two things are specified in the format specifier for the collection 
+argument. The format specifier has two parts separated by a bar (|). The part 
+before the bar is a format string that is applied to each member in the 
+collection. You can use {{k}} to interpolate the key and {{}}, {{0}}, or {{v}} 
+to interpolate the value.  If they value has attributes, you can access them 
+using something like {{v.attr}}. The part after the bar is the join string. It 
+is placed between every member.  By default the join string is ', '.
+
+::
 
     >>> print('Phone Numbers:\n    {:{{k}}: {{v}}|\n    }'.format(D))
     Phone Numbers:
