@@ -9,7 +9,7 @@ with open('README.rst') as f:
 
 setup(
     name='collection',
-    version='0.0.1',
+    version='0.0.2',
     description='unified interface to collections',
     long_description=readme,
     author="Ken Kundert",
