@@ -25,7 +25,7 @@
 from inform import is_str, is_collection
 
 # Globals {{{1
-__version__ = '0.0.2'
+__version__ = '0.1.0'
 __released__ = '2018-05-13'
 
 # Collection {{{1
