@@ -1,8 +1,8 @@
 Collection
 ==========
 
-| Version: 0.1.0
-| Released: 2018-05-13
+| Version: 0.2.0
+| Released: 2020-02-09
 |
 
 Collection is a class that provides a unified interface to various types of 

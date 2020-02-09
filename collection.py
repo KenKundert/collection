@@ -25,8 +25,8 @@
 from inform import is_str, is_collection, cull as inform_cull
 
 # Globals {{{1
-__version__ = '0.1.0'
-__released__ = '2018-05-13'
+__version__ = '0.2.0'
+__released__ = '2020-02-09'
 
 # Utilities {{{1
 def split_lines(text, comment=None, strip=False, cull=False):
