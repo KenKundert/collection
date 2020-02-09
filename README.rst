@@ -171,6 +171,38 @@ taken as a scalar::
     1 orange
     2 mango
 
+You can also specify a function as the splitter. The splitter must take a string 
+as its first argument and return any of the supported collection types (list, 
+dictionary, etc.). There is one splitter function provided: *split_lines*. It is 
+used to convert multiline strings into lists.
+
+    >>> transfers = '''
+    ...     # January
+    ...     $1,000     # from Bob
+    ...      -$500     # to Ted
+    ...
+    ...     # February
+    ...       $750     # from Carol
+    ...     -$1250     # to Alice
+    ... '''
+
+    >>> from collection import Collection, split_lines
+
+    >>> xfers = Collection(transfers, split_lines, cull=True, strip=True, comment='#')
+    >>> for xfer in xfers:
+    ...     print(xfer)
+    $1,000
+    -$500
+    $750
+    -$1250
+
+Any named arguments that are unknown to *Collection* are passed on to the 
+splitter function.  *split_lines* takes three named arguments: *comment* 
+specifies each line should be partitioned with the given comment string and the 
+comment string and whatever follows it should be removed, *cull* specifies that 
+empty lines should be removed, and *split* specifies that each member of the 
+list should be stripped of leading and trailing white space.
+
 
 Scalar
 ------
@@ -257,7 +289,7 @@ These two things are specified in the format specifier for the collection
 argument. The format specifier has two parts separated by a bar (|). The part 
 before the bar is a format string that is applied to each member in the 
 collection. You can use {{k}} to interpolate the key and {{}}, {{0}}, or {{v}} 
-to interpolate the value.  If they value has attributes, you can access them 
+to interpolate the value.  If the value has attributes, you can access them 
 using something like {{v.attr}}. The part after the bar is the join string. It 
 is placed between every member.  By default the join string is ', '.
 
@@ -300,8 +332,7 @@ virtually identical to the one above except that it uses f-strings. However, the
 above example works, but the following does not.
 
     >>> print(f'Email:\n    {C:{{v.name}} {{v.email}}|\n    }')
-    Email:
-        bob: bob@btca.com
-        ted: ted@btca.com
-        carol: carol@btca.com
-        alice: alice@btca.com
+    Traceback (most recent call last):
+      ...
+    AttributeError: 'int' object has no attribute 'name'
+

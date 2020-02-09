@@ -7,6 +7,8 @@ except ImportError:
 with open('README.rst') as f:
     readme = f.read()
 
+dependencies = 'inform'
+
 setup(
     name='collection',
     version='0.1.0',
