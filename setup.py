@@ -11,7 +11,7 @@ dependencies = ''
 
 setup(
     name='collection',
-    version='0.2.0',
+    version='0.2.1',
     description='unified interface to collections',
     long_description=readme,
     author="Ken Kundert",
