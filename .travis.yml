@@ -13,3 +13,5 @@ matrix:
       sudo: true
 install:
   - pip install .
+script:
+    py.test README.rst
