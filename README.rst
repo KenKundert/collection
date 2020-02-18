@@ -1,3 +1,7 @@
+.. initial set up for pytest
+    >>> from __future__ import print_function
+
+
 Collection
 ==========
 

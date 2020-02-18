@@ -22,7 +22,6 @@
 # along with this program.  If not, see http://www.gnu.org/licenses.
 
 # Imports {{{1
-import sys
 from inform import is_str, is_collection
 
 # Globals {{{1
@@ -30,24 +29,23 @@ __version__ = '0.2.1'
 __released__ = '2020-02-18'
 
 # Utilities {{{1
-if int(sys.version[0]) >= 3:
-    def split_lines(text, comment=None, strip=False, cull=False):
-        """Split lines
+def split_lines(text, comment=None, strip=False, cull=False):
+    """Split lines
 
-        Can be passed as a splitter to Collection. Takes a multiline string,
-        converts it to individual lines where each line is stripped (if strip is
-        True), comments are removed (if comment string is provided, and empty lines
-        are culled (if cull is True).
-        """
-        lines = text.splitlines()
-        if comment:
-            lines = (l.partition(comment)[0] for l in lines)
-        if strip:
-            lines = (l.strip() for l in lines)
-        if cull:
-            return (l for l in lines if l)
-        else:
-            return lines
+    Can be passed as a splitter to Collection. Takes a multiline string,
+    converts it to individual lines where each line is stripped (if strip is
+    True), comments are removed (if comment string is provided, and empty lines
+    are culled (if cull is True).
+    """
+    lines = text.splitlines()
+    if comment:
+        lines = (l.partition(comment)[0] for l in lines)
+    if strip:
+        lines = (l.strip() for l in lines)
+    if cull:
+        return (l for l in lines if l)
+    else:
+        return lines
 
 
 # Collection {{{1
