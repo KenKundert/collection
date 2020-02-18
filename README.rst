@@ -286,8 +286,9 @@ Formatting
 
 When formatting a collection you can specify a member format and a separator.  
 These two things are specified in the format specifier for the collection 
-argument. The format specifier has two parts separated by a bar (|). The part 
-before the bar is a format string that is applied to each member in the 
+argument. The format specifier has two parts separated by a bar (|) (this 
+character can be changed by setting the collections ``splitter`` attribute).  
+The part before the bar is a format string that is applied to each member in the 
 collection. You can use {{k}} to interpolate the key and {{}}, {{0}}, or {{v}} 
 to interpolate the value.  If the value has attributes, you can access them 
 using something like {{v.attr}}. The part after the bar is the join string. It 
@@ -327,12 +328,36 @@ is placed between every member.  By default the join string is ', '.
         carol: carol@btca.com
         alice: alice@btca.com
 
-Unfortunately, there seems to be an issue with f-strings. This example is 
-virtually identical to the one above except that it uses f-strings. However, the 
-above example works, but the following does not.
+Unfortunately, there seems to be an issue with f-strings (`bug report 
+<https://bugs.python.org/issue39601>`_). This example is virtually identical to 
+the one above except that it uses f-strings. However, the above example works, 
+but the following does not.
 
     >>> print(f'Email:\n    {C:{{v.name}} {{v.email}}|\n    }')
     Traceback (most recent call last):
       ...
     AttributeError: 'int' object has no attribute 'name'
 
+You can also set class or object attributes to control the formatting::
+
+    >>> C.fmt = '{v.name}: {v.email}'
+    >>> C.sep = '\n    '
+    >>> print(f'Email:\n    {C}')
+    Email:
+        bob: bob@btca.com
+        ted: ted@btca.com
+        carol: carol@btca.com
+        alice: alice@btca.com
+
+If you take this approach, you can make ``fmt`` a function, in which case it it 
+is called with positional arguments, ``k`` & ``v``, with the result expected to 
+be a string that represents the formatted item::
+
+    >>> C.fmt = lambda k, v: f'{v.name}: {v.email}'
+    >>> C.sep = '\n    '
+    >>> print(f'Email:\n    {C}')
+    Email:
+        bob: bob@btca.com
+        ted: ted@btca.com
+        carol: carol@btca.com
+        alice: alice@btca.com

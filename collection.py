@@ -21,9 +21,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see http://www.gnu.org/licenses.
 
-# Imports {{{1
-from inform import is_str, is_collection, cull as inform_cull
-
 # Globals {{{1
 __version__ = '0.2.0'
 __released__ = '2020-02-09'
@@ -39,16 +36,20 @@ def split_lines(text, comment=None, strip=False, cull=False):
     """
     lines = text.splitlines()
     if comment:
-        lines = [l.partition(comment)[0] for l in lines]
+        lines = (l.partition(comment)[0] for l in lines)
     if strip:
-        lines = [l.strip() for l in lines]
+        lines = (l.strip() for l in lines)
     if cull:
-        return inform_cull(lines)
+        return (line in lines if line)
     else:
         return lines
 
 # Collection {{{1
 class Collection(object):
+    fmt = {}  # default value format
+    sep = ' ' # default separator
+    splitter = '|'  # default format splitter (goes between fmt and sep)
+
     """Collection
 
     Takes a list or dictionary and provides both a list like and dictionary like
@@ -138,16 +139,21 @@ class Collection(object):
             dogs: collie (3), beagle (1), sheppard (2).
 
         """
-        components = template.split('|')
-        if len(components) == 2:
-            fmt, sep = components
-        elif len(components) == 1:
-            fmt, sep = components[0], ', '
+        if template:
+            components = template.split(self.splitter)
+            if len(components) == 2:
+                fmt, sep = components
+            else:
+                fmt, sep = components[0], ' '
         else:
-            raise ValueError('invalid format string for {!r}', self)
+            fmt, sep = self.fmt, self.sep
         if not fmt:
             fmt = '{}'
 
+        if callable(fmt):
+            for k, v in self.items():
+                ppp(fmt(k,v))
+            return sep.join(fmt(k, v) for k, v in self.items())
         return sep.join(fmt.format(v, k=k, v=v) for k, v in self.items())
 
     def __contains__(self, item):

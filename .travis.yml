@@ -1,0 +1,20 @@
+language: python
+matrix:
+  include:
+    - python: 2.7
+    - python: 3.4
+    - python: 3.5
+    - python: 3.6
+    - python: 3.7
+      sudo: true
+    - python: 3.8
+      sudo: true
+    - python: nightly
+      sudo: true
+install:
+  - pip install .
+  - pip install coveralls
+script:
+  - coverage run setup.py pytest
+after_success:
+  - coveralls
