@@ -13,8 +13,3 @@ matrix:
       sudo: true
 install:
   - pip install .
-  - pip install coveralls
-script:
-  - coverage run setup.py pytest
-after_success:
-  - coveralls

@@ -22,7 +22,7 @@ setup(
     install_requires=dependencies.split(),
     setup_requires='pytest-runner>=2.0'.split(),
     tests_require='pytest'.split(),
-    python_requires='>=3.5',
+    python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*',
     keywords='collections lists dictionaries'.split(),
     classifiers=[
         'Development Status :: 5 - Production/Stable',
