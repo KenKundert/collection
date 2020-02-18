@@ -157,8 +157,6 @@ class Collection(object):
             fmt = '{}'
 
         if callable(fmt):
-            for k, v in self.items():
-                ppp(fmt(k,v))
             return sep.join(fmt(k, v) for k, v in self.items())
         return sep.join(fmt.format(v, k=k, v=v) for k, v in self.items())
 
