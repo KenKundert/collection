@@ -11,7 +11,7 @@ dependencies = 'inform'
 
 setup(
     name='collection',
-    version='0.2.1',
+    version='0.3.0',
     description='unified interface to collections',
     long_description=readme,
     author="Ken Kundert",

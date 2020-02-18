@@ -5,7 +5,7 @@
 Collection
 ==========
 
-| Version: 0.2.1
+| Version: 0.3.0
 | Released: 2020-02-18
 |
 
