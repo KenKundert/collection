@@ -26,9 +26,7 @@ Consider the following collections::
     >>> o = 'tooth'
 
 Passing these to Collection allow you to treat them either as lists or as 
-dictionaries::
-
-    >>> from collection import Collection
+dictionaries.
 
 
 Lists
@@ -37,6 +35,7 @@ Lists
 You can build a collection from a list. In this case the index is used as the 
 key::
 
+    >>> from collection import Collection
     >>> L = Collection(l)
     >>> for each in L:
     ...     print(each)
