@@ -1,8 +1,11 @@
 language: python
 install:
   - pip install .
+  - pip install coveralls
 script:
-    py.test README.rst
+    py.test --cov --doctest-modules collection.py README.rst
+after_success:
+  - coveralls
 jobs:
   include:
     - python: 3.6
@@ -11,3 +14,4 @@ jobs:
     - python: nightly
   allow_failures:
     - python: nightly
+  fast_finish: true
