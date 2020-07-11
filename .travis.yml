@@ -3,7 +3,7 @@ install:
   - pip install .
   - pip install coveralls pytest
 script:
-  - py.test --cov --doctest-modules collection.py README.rst
+  - py.test --doctest-modules collection.py README.rst
 after_success:
   - coveralls
 jobs:
