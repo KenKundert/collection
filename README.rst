@@ -8,8 +8,10 @@ Collection
 .. image:: https://img.shields.io/travis/KenKundert/collection/master.svg
     :target: https://travis-ci.org/KenKundert/collection
 
-.. image:: https://img.shields.io/coveralls/KenKundert/collection.svg
-    :target: https://coveralls.io/r/KenKundert/collection
+.. image:: https://coveralls.io/repos/github/KenKundert/collection/badge.svg?branch=master
+    :target: https://coveralls.io/github/KenKundert/collection?branch=master
+
+
 
 
 | Version: 0.3.1
