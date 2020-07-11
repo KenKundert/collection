@@ -5,6 +5,13 @@
 Collection
 ==========
 
+.. image:: https://img.shields.io/travis/KenKundert/collection/master.svg
+    :target: https://travis-ci.org/KenKundert/collection
+
+.. image:: https://img.shields.io/coveralls/KenKundert/collection.svg
+    :target: https://coveralls.io/r/KenKundert/collection
+
+
 | Version: 0.3.1
 | Released: 2020-02-21
 |
