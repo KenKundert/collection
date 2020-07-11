@@ -1,13 +1,13 @@
 language: python
-matrix:
-  include:
-    - python: 2.7
-    - python: 3.5
-    - python: 3.6
-    - python: 3.7
-    - python: 3.8
-    - python: nightly
 install:
   - pip install .
 script:
     py.test README.rst
+jobs:
+  include:
+    - python: 3.6
+    - python: 3.7
+    - python: 3.8
+    - python: nightly
+  allow_failures:
+    - python: nightly
