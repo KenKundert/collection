@@ -40,20 +40,20 @@ def split_lines(text, comment=None, strip=False, cull=False):
     """
     lines = text.splitlines()
     if comment:
-        lines = (l.partition(comment)[0] for l in lines)
+        lines = list(l.partition(comment)[0] for l in lines)
     if strip:
-        lines = (l.strip() for l in lines)
+        lines = list(l.strip() for l in lines)
     if cull:
-        return (l for l in lines if l)
+        return list(l for l in lines if l)
     else:
-        return lines
+        return list(lines)
 
 
 # Collection {{{1
 class Collection(object):
-    fmt = {}  # default value format
-    sep = " "  # default separator
-    splitter = "|"  # default format splitter (goes between fmt and sep)
+    fmt = '{v}'     # default value format
+    sep = " "       # default separator
+    splitter = "|"  # default format splitter (goes between fmt and sep in template)
 
     """Collection
 
@@ -89,23 +89,23 @@ class Collection(object):
 
     def keys(self):
         try:
-            return self.collection.keys()
+            return list(self.collection.keys())
         except AttributeError:
-            return range(len(self.collection))
+            return list(range(len(self.collection)))
 
     def values(self):
         try:
             return [self.collection[k] for k in self.collection.keys()]
         except AttributeError:
-            return self.collection
+            return list(self.collection)
 
     def items(self):
         try:
             return [(k, self.collection[k]) for k in self.collection.keys()]
         except AttributeError:
-            return enumerate(self.collection)
+            return list(enumerate(self.collection))
 
-    def render(self, fmt="{v}", sep=", "):
+    def render(self, fmt=None, sep=None):
         """Convert the collection into a string
 
         fmt (str):
@@ -128,7 +128,9 @@ class Collection(object):
 
         """
         if not fmt:
-            fmt = "{}"
+            fmt = self.fmt
+        if not sep:
+            sep = self.sep
 
         return sep.join(fmt.format(v, k=k, v=v) for k, v in self.items())
 
@@ -152,9 +154,11 @@ class Collection(object):
             else:
                 fmt, sep = components[0], " "
         else:
-            fmt, sep = self.fmt, self.sep
+            fmt, sep = None, None
         if not fmt:
-            fmt = "{}"
+            fmt = self.fmt
+        if not sep:
+            sep = self.sep
 
         if callable(fmt):
             return sep.join(fmt(k, v) for k, v in self.items())

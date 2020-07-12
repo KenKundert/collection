@@ -1,0 +1,3 @@
+#!/bin/sh
+
+py.test --doctest-modules collection.py README.rst test_collection.py

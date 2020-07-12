@@ -5,3 +5,4 @@ exclude_lines =
 
 [run]
 source = .
+omit = setup.py, test_collection.py
