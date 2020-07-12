@@ -91,7 +91,10 @@ def test_set():
     assert 99 not in S
     with pytest.raises(TypeError) as exception:
         S[5]
-    assert str(exception.value) == "'set' object is not subscriptable"
+    assert str(exception.value) in (
+        "'set' object is not subscriptable",
+        "'set' object does not support indexing",
+    )
 
 def test_text_no_split():
     t = 'apple orange mango'
