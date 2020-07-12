@@ -1,7 +1,7 @@
 language: python
 install:
   - pip install .
-  - pip install coveralls pytest pytest-cov
+  - pip install coveralls pytest>=4.6 pytest-cov
 script:
   - py.test --doctest-modules collection.py README.rst
 after_success:
