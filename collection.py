@@ -132,6 +132,8 @@ class Collection(object):
         if not sep:
             sep = self.sep
 
+        if callable(fmt):
+            return sep.join(fmt(k, v) for k, v in self.items())
         return sep.join(fmt.format(v, k=k, v=v) for k, v in self.items())
 
     def __format__(self, template):

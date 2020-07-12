@@ -241,6 +241,8 @@ def test_formatting():
     assert L.render() == 'alpha, beta, gamma, delta, epsilon'
     L.fmt = '<{v}>'
     assert L.render() == '<alpha>, <beta>, <gamma>, <delta>, <epsilon>'
+    L.fmt = lambda k, v: f'{k}: {v}'
+    assert L.render() == '0: alpha, 1: beta, 2: gamma, 3: delta, 4: epsilon'
 
     d = dict(
         bob='239-8402', ted='371-8567', carol='891-5810', alice='552-2219'
@@ -260,7 +262,8 @@ def test_formatting():
         Info(name='alice', email='alice@btca.com'),
     ])
     result1 = 'Email:\n    {}'.format(C.render('{v.name}: {v.email}', '\n    '))
-    result2 = 'Email:\n    {:{{v.name}}: {{v.email}}|\n    }'.format(C)
+    result2 = 'Email:\n    {}'.format(C.render(lambda k, v: f'{v.name}: {v.email}', '\n    '))
+    result3 = 'Email:\n    {:{{v.name}}: {{v.email}}|\n    }'.format(C)
     expected1 = dedent('''
         Email:
             bob: bob@btca.com
@@ -270,6 +273,7 @@ def test_formatting():
     ''').strip()
     assert result1 == expected1
     assert result2 == expected1
-    result3 = '{:{{v.name}}={{v.email}}}'.format(C)
-    expected3 = 'bob=bob@btca.com ted=ted@btca.com carol=carol@btca.com alice=alice@btca.com'
-    assert result3 == expected3
+    assert result3 == expected1
+    result4 = '{:{{v.name}}={{v.email}}}'.format(C)
+    expected4 = 'bob=bob@btca.com ted=ted@btca.com carol=carol@btca.com alice=alice@btca.com'
+    assert result4 == expected4
