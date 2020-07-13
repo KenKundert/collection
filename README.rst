@@ -185,8 +185,10 @@ taken as a scalar)::
 
 You can also specify a function as the splitter. The splitter must take a string 
 as its first argument and return any of the supported collection types (list, 
-dictionary, etc.). There is one splitter function provided: *split_lines*. It is 
-used to convert multiline strings into lists.
+dictionary, etc.). Any unrecognized named arguments passed to *Collection* are 
+forwarded to the splitter function. There is one splitter function provided: 
+*split_lines*.  It is used to convert multiline strings into lists or 
+dictionaries.
 
     >>> transfers = '''
     ...     # January
@@ -226,12 +228,13 @@ used to convert multiline strings into lists.
     carol $750
     alice -$1250
 
-Any named arguments that are unknown to *Collection* are passed on to the 
-splitter function.  *split_lines* takes three named arguments: *comment* 
-specifies each line should be partitioned with the given comment string and the 
-comment string and whatever follows it should be removed, *cull* specifies that 
-empty lines should be removed, and *split* specifies that each member of the 
-list should be stripped of leading and trailing white space.
+*split_lines* takes three named arguments: *comment* specifies each line should 
+be partitioned with the given comment string and the comment string and whatever 
+follows it should be removed, *cull* specifies that empty lines should be 
+removed, and *split* specifies that each member of the list should be stripped 
+of leading and trailing white space.
+Since these named arguments are unknown to *Collection*, they are passed on to 
+*split_lines*.
 
 
 Scalar
