@@ -14,7 +14,7 @@ Collection
 
 
 
-| Version: 0.4.0
+| Version: 0.4.1
 | Released: 2020-07-12
 |
 
