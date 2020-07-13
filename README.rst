@@ -240,8 +240,8 @@ Since these named arguments are unknown to *Collection*, they are passed on to
 *split_lines*.
 
 
-Scalar
-------
+Scalars
+-------
 
 You can build a collection from a single member. In this case the key is None::
 
@@ -302,7 +302,8 @@ the key::
 Indexing
 --------
 
-You can access the individual members of you collection using an index/key::
+You can access the individual members of you collection using an index or key as 
+appropriate::
 
     >>> L[0]
     'alpha'
