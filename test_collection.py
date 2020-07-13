@@ -166,7 +166,7 @@ def test_text_splitter_smpl():
     assert str(exception.value) == 'list index out of range'
 
 
-def test_text_splitter():
+def test_text_splitter_list():
     t = transfers = '''
         # January
         $1,000     # from Bob
@@ -202,6 +202,37 @@ def test_text_splitter():
     with pytest.raises(IndexError) as exception:
         T[5]
     assert str(exception.value) == 'list index out of range'
+
+def test_text_splitter_dict():
+    t = transfers = '''
+        # January
+        bob =   $1,000     # from Bob
+        ted =    -$500     # to Ted
+
+        # February
+        carol =   $750     # from Carol
+        alice = -$1250     # to Alice
+    '''
+    T = Collection(t, split_lines, cull=True, strip=True, comment='#', sep='=')
+    d = dict(bob='$1,000', ted='-$500', carol='$750', alice='-$1250')
+
+    assert list(m for m in T) == list(d.values())
+    assert T.values() == list(d.values())
+    assert T.keys() == list(d.keys())
+    assert T.items() == list((k, v) for k, v in d.items())
+    assert len(T) == len(d)
+    assert '$1,000' in T
+    assert '-$500' in T
+    assert '$750' in T
+    assert '-$1250' in T
+    assert 'upsilon' not in T
+    assert T['bob'] == '$1,000'
+    assert T['ted'] == '-$500'
+    assert T['carol'] == '$750'
+    assert T['alice'] == '-$1250'
+    with pytest.raises(KeyError) as exception:
+        T['jeff']
+    assert str(exception.value) == "'jeff'"
 
 def test_generator():
     L = Collection(range(5))

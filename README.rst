@@ -153,10 +153,10 @@ key::
 Text
 ----
 
-If you provide a string it will be split for form a list. You can specify the 
+If you provide a string it will be split to form a list. You can specify the 
 *splitter* string, but if you don't the string is split on white space. You can 
 also specify *splitter=False*, in which case the string is not split (it is 
-taken as a scalar::
+taken as a scalar)::
 
     >>> T = Collection(t)
     >>> for each in T:
@@ -207,6 +207,24 @@ used to convert multiline strings into lists.
     -$500
     $750
     -$1250
+
+    >>> transfers = '''
+    ...     # January
+    ...     bob   = $1,000     # from Bob
+    ...     ted   =  -$500     # to Ted
+    ...
+    ...     # February
+    ...     carol =   $750     # from Carol
+    ...     alice = -$1250     # to Alice
+    ... '''
+
+    >>> xfers = Collection(transfers, split_lines, cull=True, strip=True, comment='#', sep='=')
+    >>> for who, amount in xfers.items():
+    ...     print(who, amount)
+    bob $1,000
+    ted -$500
+    carol $750
+    alice -$1250
 
 Any named arguments that are unknown to *Collection* are passed on to the 
 splitter function.  *split_lines* takes three named arguments: *comment* 

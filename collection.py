@@ -30,13 +30,17 @@ __released__ = "2020-07-12"
 
 
 # Utilities {{{1
-def split_lines(text, comment=None, strip=False, cull=False):
+def split_lines(text, comment=None, strip=False, cull=False, sep=None):
     """Split lines
 
-    Can be passed as a splitter to Collection. Takes a multiline string,
-    converts it to individual lines where each line is stripped (if strip is
-    True), comments are removed (if comment string is provided, and empty lines
-    are culled (if cull is True).
+    Can be passed as a splitter to Collection. Takes a multi-line string,
+    converts it to individual lines where comments are removed (if comment
+    string is provided), each line is stripped (if strip is True), and empty
+    lines are culled (if cull is True).  If sep is specified, the line is
+    partitioned into a key and value (everything before sep is the key,
+    everything after is value). In this case a dictionary is returned. Otherwise
+    a list is returned.
+
     """
     lines = text.splitlines()
     if comment:
@@ -44,9 +48,12 @@ def split_lines(text, comment=None, strip=False, cull=False):
     if strip:
         lines = list(l.strip() for l in lines)
     if cull:
-        return list(l for l in lines if l)
-    else:
-        return list(lines)
+        lines = list(l for l in lines if l)
+    if sep:
+        pairs = dict(l.partition(sep)[::2] for l in lines)
+        if strip:
+            lines = {k.strip():v.strip() for k, v in pairs.items()}
+    return lines
 
 
 # Collection {{{1
