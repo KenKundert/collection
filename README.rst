@@ -210,6 +210,9 @@ dictionaries.
     $750
     -$1250
 
+Passing *sep* to *split_lines* causes it to generate a dictionary rather than 
+a list.
+
     >>> transfers = '''
     ...     # January
     ...     bob   = $1,000     # from Bob
