@@ -120,30 +120,30 @@ Sets
 You can build a collection from a set. In this case the index is used as the 
 key::
 
-    >>> S = Collection(s)
-    >>> for each in S:
-    ...     print(each)
+    >> S = Collection(s)
+    >> for each in S:
+    ..     print(each)
     37
     27
     45
     22
 
-    >>> for each in S.values():
-    ...     print(each)
+    >> for each in S.values():
+    ..     print(each)
     37
     27
     45
     22
 
-    >>> for each in S.keys():
-    ...     print(each)
+    >> for each in S.keys():
+    ..     print(each)
     0
     1
     2
     3
 
-    >>> for k, v in S.items():
-    ...     print(k, v)
+    >> for k, v in S.items():
+    ..     print(k, v)
     0 37
     1 27
     2 45
