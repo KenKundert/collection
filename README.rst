@@ -14,8 +14,8 @@ Collection
 
 
 
-| Version: 0.4.1
-| Released: 2020-07-12
+| Version: 0.5.0
+| Released: 2021-01-27
 |
 
 Collection is a class that provides a unified interface to various types of 
