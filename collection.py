@@ -2,8 +2,7 @@
 #
 # Provides common interface for dictionaries and lists. If a string is passed
 # in, it is split and then treated as a list. Optimized for convenience rather
-# than for large collections. Sorting versus the key is used to avoid randomness
-# in the ordering of the dictionary-based collections.
+# than for large collections.
 
 # License {{{1
 # Copyright (C) 2016-2021 Kenneth S. Kundert
