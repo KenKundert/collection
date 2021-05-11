@@ -125,9 +125,9 @@ class Collection(object):
 
             >>> from collection import Collection
 
-            >>> dogs = Collection({'collie': 3, 'beagle':1, 'sheppard': 2})
+            >>> dogs = Collection({'collie': 3, 'beagle':1, 'shepherd': 2})
             >>> print('dogs: {}.'.format(dogs.render('{k} ({v})', ', ')))
-            dogs: collie (3), beagle (1), sheppard (2).
+            dogs: collie (3), beagle (1), shepherd (2).
 
             >>> print('dogs: {}.'.format(dogs.render(sep=', ')))
             dogs: 3, 1, 2.
@@ -150,9 +150,9 @@ class Collection(object):
         value are interpolated using {{k}} to represent the key and {{v}} to
         represent the value.  The second component is the separator. Thus:
 
-            >>> dogs = Collection({'collie': 3, 'beagle':1, 'sheppard': 2})
+            >>> dogs = Collection({'collie': 3, 'beagle':1, 'shepherd': 2})
             >>> print('dogs: {:{{k}} ({{v}})|, }.'.format(dogs))
-            dogs: collie (3), beagle (1), sheppard (2).
+            dogs: collie (3), beagle (1), shepherd (2).
 
         """
         if template:
