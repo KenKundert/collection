@@ -17,7 +17,7 @@ setup(
     author = "Ken Kundert",
     author_email = 'collection@nurdletech.com',
     license = 'GPLv3+',
-    zip_safe = False,
+    zip_safe = True,
     py_modules = ['collection'],
     install_requires = dependencies.split(),
     setup_requires = 'pytest-runner>=2.0'.split(),
