@@ -78,6 +78,15 @@ key::
     3 delta
     4 epsilon
 
+    >>> print(L[2])
+    gamma
+
+    >>> print(L.get(4))
+    epsilon
+
+    >>> print(L.get(5, '<not available>'))
+    <not available>
+
 
 Dictionaries
 ------------
@@ -112,6 +121,15 @@ You can build a collection from a dictionary::
     ted 371-8567
     carol 891-5810
     alice 552-2219
+
+    >>> print(D['ted'])
+    371-8567
+
+    >>> print(D.get('carol'))
+    891-5810
+
+    >>> print(D.get('george', '<unknown>'))
+    <unknown>
 
 
 Sets
