@@ -391,7 +391,7 @@ but the following does not.
     >>> print(f'Email:\n    {C:{{v.name}} {{v.email}}|\n    }')
     Traceback (most recent call last):
       ...
-    AttributeError: 'int' object has no attribute 'name'
+    SyntaxError: f-string: single '}' is not allowed
 
 You can also set class or object attributes to control the formatting::
 
